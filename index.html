@@ -343,15 +343,15 @@
             border: 1px solid var(--card-border);
             border-radius: 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
             text-align: center;
             box-shadow: var(--shadow-card);
             backdrop-filter: blur(10px);
         }
 
         .metric-item h3 {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--cyan);
             font-family: var(--font-code);
@@ -360,7 +360,7 @@
 
         .metric-item p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 600;
@@ -1146,6 +1146,21 @@
             }
         }
 
+        /* Footer Visitor Pill */
+        .footer-visitor-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--tag-bg);
+            border: 1px solid var(--card-border);
+            padding: 0.35rem 0.9rem;
+            border-radius: 9999px;
+            font-family: var(--font-code);
+            font-size: 0.82rem;
+            color: var(--cyan);
+            margin-top: 1rem;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -1268,7 +1283,7 @@
         </div>
     </section>
 
-    <!-- Metric Counters -->
+    <!-- Metric Counters Banner (with Dynamic Visitor Counter starting at 1265) -->
     <div class="metric-banner">
         <div class="metric-item">
             <h3>4+</h3>
@@ -1285,6 +1300,10 @@
         <div class="metric-item">
             <h3>100%</h3>
             <p>Data & Value Driven</p>
+        </div>
+        <div class="metric-item">
+            <h3 id="visitor-count">1,265</h3>
+            <p><i class="fa-solid fa-eye" style="color: var(--emerald); font-size: 0.8rem; margin-right: 0.2rem;"></i> Total Visitors</p>
         </div>
     </div>
 
@@ -1716,7 +1735,7 @@
             <div class="resume-modal-header">
                 <h3><i class="fa-solid fa-file-invoice"></i> Verified Curriculum Vitae</h3>
                 <div class="resume-actions-top">
-                    <!-- Download PDF Action (Print Option Removed) -->
+                    <!-- Download PDF Action -->
                     <a href="Adarsh_Banshpal_FlowCV.pdf" download="Adarsh_Banshpal_Resume.pdf" class="btn-modal-action btn-modal-download" title="Download PDF File">
                         <i class="fa-solid fa-download"></i> Download PDF
                     </a>
@@ -1743,7 +1762,7 @@
                 <div class="resume-section">
                     <div class="resume-section-title"><i class="fa-solid fa-user"></i> Professional Profile</div>
                     <p style="color: var(--text-secondary); line-height: 1.7;">
-                        Analytical and detail-oriented MBA candidate specializing in Business Analytics, backed by a strong foundation in Mechanical Engineering. Proficient in leveraging SQL, Python, Power BI, and advanced Excel to translate complex data into actionable business strategies. Combines quantitative engineering problem-solving with recent experience in client acquisition and campaign performance metrics to drive cross-functional efficiency[cite: 1].
+                        Analytical and detail-oriented MBA candidate specializing in Business Analytics, backed by a strong foundation in Mechanical Engineering. Proficient in leveraging SQL, Python, Power BI, and advanced Excel to translate complex data into actionable business strategies. Combines quantitative engineering problem-solving with recent experience in client acquisition and campaign performance metrics to drive cross-functional efficiency.
                     </p>
                 </div>
 
@@ -1753,19 +1772,19 @@
                     <div class="resume-skills-block">
                         <div>
                             <strong>Technical Skills:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">SQL, Python (NumPy, Pandas, Matplotlib), Power BI, Advanced Excel[cite: 1].</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">SQL, Python (NumPy, Pandas, Matplotlib), Power BI, Advanced Excel.</p>
                         </div>
                         <div>
                             <strong>Design & Media Tools:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Adobe Creative Suite, Google Ads, Prompt Engineering, SolidWorks CAD[cite: 1].</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Adobe Creative Suite, Google Ads, Prompt Engineering, SolidWorks CAD.</p>
                         </div>
                         <div>
                             <strong>Interpersonal Competencies:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Creativity, Leadership, Problem Identification & Solving, Adaptability, Team Work, Active Listening[cite: 1].</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Creativity, Leadership, Problem Identification & Solving, Adaptability, Team Work, Active Listening.</p>
                         </div>
                         <div>
                             <strong>Languages:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">English, Hindi (Full Professional Proficiency)[cite: 1].</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">English, Hindi (Full Professional Proficiency).</p>
                         </div>
                     </div>
                 </div>
@@ -1779,10 +1798,10 @@
                             <span>Digital Marketing Intern</span>
                             <span class="dates">12/2025 – 02/2026</span>
                         </div>
-                        <div class="resume-item-sub">Pitambara Physio Care Rehab, Jabalpur[cite: 1]</div>
+                        <div class="resume-item-sub">Pitambara Physio Care Rehab, Jabalpur</div>
                         <ul>
-                            <li>Authored a comprehensive study on social media marketing effectiveness to improve digital outreach strategies and client acquisition[cite: 1].</li>
-                            <li>Designed targeted questionnaires to accurately measure campaign engagement and overall digital performance[cite: 1].</li>
+                            <li>Authored a comprehensive study on social media marketing effectiveness to improve digital outreach strategies and client acquisition.</li>
+                            <li>Designed targeted questionnaires to accurately measure campaign engagement and overall digital performance.</li>
                         </ul>
                     </div>
 
@@ -1791,9 +1810,9 @@
                             <span>Digital Media Co-ordinator (Internship)</span>
                             <span class="dates">12/2025 – 02/2026</span>
                         </div>
-                        <div class="resume-item-sub">Padma Advertising[cite: 1]</div>
+                        <div class="resume-item-sub">Padma Advertising</div>
                         <ul>
-                            <li>Coordinated digital media operations and assisted in managing advertising initiatives[cite: 1].</li>
+                            <li>Coordinated digital media operations and assisted in managing advertising initiatives.</li>
                         </ul>
                     </div>
                 </div>
@@ -1807,7 +1826,7 @@
                             <span>MBA in Business Analytics</span>
                             <span class="dates">2024 – 2026</span>
                         </div>
-                        <div class="resume-item-sub">Gyan Ganga Institute of Technology and Sciences, Jabalpur (Current CGPA: 70%)[cite: 1]</div>
+                        <div class="resume-item-sub">Gyan Ganga Institute of Technology and Sciences, Jabalpur (Current CGPA: 70%)</div>
                     </div>
 
                     <div class="resume-item">
@@ -1815,7 +1834,7 @@
                             <span>B.Tech in Mechanical Engineering</span>
                             <span class="dates">2021 – 2024</span>
                         </div>
-                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 74.7%)[cite: 1]</div>
+                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 74.7%)</div>
                     </div>
 
                     <div class="resume-item">
@@ -1823,7 +1842,7 @@
                             <span>Diploma in Mechanical Engineering</span>
                             <span class="dates">2018 – 2021</span>
                         </div>
-                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 77.6%)[cite: 1]</div>
+                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 77.6%)</div>
                     </div>
                 </div>
 
@@ -1837,9 +1856,9 @@
                             <span class="dates">Client Projects</span>
                         </div>
                         <ul>
-                            <li>Developed custom, interactive HTML portfolio websites for customers based on their branding and business requirements[cite: 1].</li>
-                            <li>Designed responsive and visually engaging web pages to showcase multimedia content, services, and digital experiences[cite: 1].</li>
-                            <li>Integrated front-end development with UI/UX and digital marketing principles[cite: 1].</li>
+                            <li>Developed custom, interactive HTML portfolio websites for customers based on their branding and business requirements.</li>
+                            <li>Designed responsive and visually engaging web pages to showcase multimedia content, services, and digital experiences.</li>
+                            <li>Integrated front-end development with UI/UX and digital marketing principles.</li>
                         </ul>
                     </div>
 
@@ -1849,9 +1868,9 @@
                             <span class="dates">Streamlit & Python</span>
                         </div>
                         <ul>
-                            <li>Developed interactive dashboards to transform raw Excel and SQL data into clear, actionable business visualizations[cite: 1].</li>
-                            <li>Cleaned, organized, and analyzed datasets to identify revenue trends, sales performance, and customer segments[cite: 1].</li>
-                            <li>Built visualizations for supply chain tracking, revenue analysis, and customer segmentation[cite: 1].</li>
+                            <li>Developed interactive dashboards to transform raw Excel and SQL data into clear, actionable business visualizations.</li>
+                            <li>Cleaned, organized, and analyzed datasets to identify revenue trends, sales performance, and customer segments.</li>
+                            <li>Built visualizations for supply chain tracking, revenue analysis, and customer segmentation.</li>
                         </ul>
                     </div>
 
@@ -1861,8 +1880,8 @@
                             <span class="dates">Power BI & DAX</span>
                         </div>
                         <ul>
-                            <li>Developed a Power BI dashboard to analyze viewer engagement, retention, watch time, and subscriber growth for Pitambara Physio Care & Rehab[cite: 1].</li>
-                            <li>Created interactive charts, KPI cards, and trend visualizations to identify patterns in audience behavior[cite: 1].</li>
+                            <li>Developed a Power BI dashboard to analyze viewer engagement, retention, watch time, and subscriber growth for Pitambara Physio Care & Rehab.</li>
+                            <li>Created interactive charts, KPI cards, and trend visualizations to identify patterns in audience behavior.</li>
                         </ul>
                     </div>
 
@@ -1872,7 +1891,7 @@
                             <span class="dates">Mechanical Engineering</span>
                         </div>
                         <ul>
-                            <li>Developed a low-cost vacuum chamber system to establish depressurized environments for material science, aerospace, and chemical testing applications[cite: 1].</li>
+                            <li>Developed a low-cost vacuum chamber system to establish depressurized environments for material science, aerospace, and chemical testing applications.</li>
                         </ul>
                     </div>
                 </div>
@@ -1881,9 +1900,9 @@
                 <div class="resume-section">
                     <div class="resume-section-title"><i class="fa-solid fa-award"></i> Certifications</div>
                     <ul>
-                        <li><strong>Artificial Intelligence Job Simulation:</strong> Cognizant (Forage) – Machine Learning, Model Building, QA & Data Modeling[cite: 1].</li>
-                        <li><strong>Digital Marketing:</strong> MSME Certified[cite: 1].</li>
-                        <li><strong>Elements of CAD & SolidWorks:</strong> Engineering Design and 3D Modeling[cite: 1].</li>
+                        <li><strong>Artificial Intelligence Job Simulation:</strong> Cognizant (Forage) – Machine Learning, Model Building, QA & Data Modeling.</li>
+                        <li><strong>Digital Marketing:</strong> MSME Certified.</li>
+                        <li><strong>Elements of CAD & SolidWorks:</strong> Engineering Design and 3D Modeling.</li>
                     </ul>
                 </div>
             </div>
@@ -1893,13 +1912,58 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Adarsh Banshpal. Built with precision, data & code. Jabalpur, India.</p>
+        <div class="footer-visitor-pill">
+            <i class="fa-solid fa-signal" style="color: var(--emerald);"></i>
+            <span>Visitor Count: <strong id="footer-visitor-count">1,265</strong></span>
+        </div>
     </footer>
 
     <!-- Interactive Scripts -->
     <script>
+        // --- 0. Visitor Counter Engine (Base: 1265 -> n+1 Increment & Animated Count) ---
+        (function initVisitorCounter() {
+            const BASE_VISITORS = 1265;
+            
+            // Check session vs total hits to increment on every fresh visit
+            let visitCount = parseInt(localStorage.getItem("adarsh_portfolio_visits") || "0", 10);
+            
+            // Increment visitor counter
+            visitCount += 1;
+            localStorage.setItem("adarsh_portfolio_visits", visitCount);
+            
+            const totalVisitors = BASE_VISITORS + (visitCount - 1);
+            
+            function animateCounter(el, start, end, duration) {
+                if (!el) return;
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const currentVal = Math.floor(progress * (end - start) + start);
+                    el.textContent = currentVal.toLocaleString();
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        el.textContent = end.toLocaleString();
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // Animate on DOM load
+            document.addEventListener("DOMContentLoaded", () => {
+                const bannerCounter = document.getElementById("visitor-count");
+                const footerCounter = document.getElementById("footer-visitor-count");
+                
+                const startAnimVal = Math.max(0, totalVisitors - 35);
+                animateCounter(bannerCounter, startAnimVal, totalVisitors, 1400);
+                if (footerCounter) {
+                    footerCounter.textContent = totalVisitors.toLocaleString();
+                }
+            });
+        })();
+
         // --- 1. Google Sheets Inquiry Form Submission Handler ---
-        // Spreadsheet ID: 1v_CkapvCDoFysh2kClvixe1yHs9KJwP9LjvLwA96zAM
-        // To connect directly: Deploy a Google Apps Script Web App attached to your sheet and paste its URL into GOOGLE_SCRIPT_WEB_APP_URL below.
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby-YOUR_DEPLOYED_APP_ID/exec"; 
 
         const inquiryForm = document.getElementById("google-sheets-inquiry-form");
@@ -1919,7 +1983,6 @@
             formData.append("Sheet_ID", "1v_CkapvCDoFysh2kClvixe1yHs9KJwP9LjvLwA96zAM");
 
             try {
-                // If you haven't deployed your Google Apps Script yet, fallback opens pre-filled email to ensure zero lost leads
                 if (GOOGLE_SCRIPT_WEB_APP_URL.includes("YOUR_DEPLOYED_APP_ID")) {
                     const name = formData.get("Name");
                     const email = formData.get("Email");
@@ -1975,7 +2038,6 @@
             }
         }
 
-        // Close on Escape key
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") closeResumeModal();
         });
@@ -2006,7 +2068,6 @@
             updateThemeIcons(newTheme);
         }
 
-        // Initialize Theme from Storage
         const savedTheme = localStorage.getItem("portfolio-theme") || "dark";
         if (savedTheme === "light") {
             document.documentElement.setAttribute("data-theme", "light");
