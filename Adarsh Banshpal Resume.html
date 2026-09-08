@@ -3,239 +3,1292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adarsh Banshpal | Interactive Portfolio</title>
+    <title>Adarsh Banshpal | Business Analyst & Technologist</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #1e293b;
-            --text: #f8fafc;
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
+            --bg-main: #0a0d14;
+            --bg-card: rgba(18, 24, 38, 0.7);
+            --bg-card-hover: rgba(26, 35, 54, 0.85);
+            --border-glow: rgba(0, 242, 254, 0.2);
+            --border-glow-hover: rgba(0, 242, 254, 0.6);
+            --cyan: #00f2fe;
+            --purple: #9d4edd;
+            --emerald: #00f5d4;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
+
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
-        header {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--secondary) 0%, #000000 100%);
-            border-bottom: 3px solid var(--primary);
-        }
-        header h1 {
-            font-size: 3rem;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-        header p {
-            font-size: 1.2rem;
-            color: #cbd5e1;
-        }
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--secondary);
-            position: sticky;
+
+        #particle-canvas {
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
-        .nav-tabs button {
-            background: transparent;
-            color: var(--text);
-            border: 2px solid transparent;
-            padding: 0.5rem 1.5rem;
-            cursor: pointer;
-            font-size: 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+
+        /* Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background: rgba(10, 13, 20, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: var(--transition);
         }
-        .nav-tabs button:hover, .nav-tabs button.active {
-            border-color: var(--primary);
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--accent);
+
+        .nav-container {
+            max-width: 1240px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 2rem;
         }
-        .container {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.5px;
         }
-        .section {
-            display: none;
-            animation: fadeIn 0.5s ease;
+
+        .logo span {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .section.active {
-            display: block;
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
         }
-        .card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-            transition: transform 0.2s ease;
+
+        .nav-links a:hover {
+            color: var(--cyan);
         }
-        .card:hover {
-            transform: translateX(5px);
-            border-left-color: var(--accent);
+
+        .nav-btn {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(157, 78, 221, 0.15));
+            border: 1px solid var(--border-glow);
+            padding: 0.55rem 1.25rem;
+            border-radius: 9999px;
+            color: var(--cyan) !important;
+            font-weight: 600;
         }
-        .card h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
+
+        .nav-btn:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            transform: translateY(-2px);
         }
-        .skills-grid {
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 245, 212, 0.1);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            color: var(--emerald);
+            padding: 0.4rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-family: var(--font-code);
+            margin-bottom: 1.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--emerald);
+            box-shadow: 0 0 10px var(--emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #ffffff 20%, var(--cyan) 70%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typewriter-box {
+            font-family: var(--font-code);
+            font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+            color: var(--cyan);
+            min-height: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 720px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--cyan), #00a8ff);
+            color: #050b14;
+            font-weight: 700;
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0, 242, 254, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(0, 242, 254, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 0.85rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--cyan);
+            transform: translateY(-3px);
+        }
+
+        /* Metric Counters Bar */
+        .metric-banner {
+            max-width: 1100px;
+            margin: -2rem auto 5rem;
+            padding: 2rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-item h3 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--cyan);
+            font-family: var(--font-code);
+            margin-bottom: 0.2rem;
+        }
+
+        .metric-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Common Section Layout */
+        .section-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-tag {
+            font-family: var(--font-code);
+            color: var(--cyan);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        /* Interactive Filter Projects Section */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.4rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.2), rgba(157, 78, 221, 0.2));
+            color: var(--cyan);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-glow-hover);
+            background: var(--bg-card-hover);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 254, 0.15);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(0, 242, 254, 0.1);
+            color: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .live-tag {
+            font-size: 0.75rem;
+            font-family: var(--font-code);
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 9999px;
+            background: rgba(0, 245, 212, 0.15);
+            color: var(--emerald);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+            text-transform: uppercase;
+        }
+
+        .project-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags span {
+            background: rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            font-family: var(--font-code);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card-actions {
+            margin-top: auto;
+            display: flex;
             gap: 1rem;
         }
-        .skill-tag {
-            background: #334155;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+
+        .btn-launch {
+            width: 100%;
             text-align: center;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15), rgba(157, 78, 221, 0.15));
+            border: 1px solid var(--border-glow);
+            color: var(--cyan);
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .btn-launch:hover {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #050b14;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Skills Matrix */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .skill-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 1.75rem;
+            transition: var(--transition);
+        }
+
+        .skill-box:hover {
+            border-color: rgba(157, 78, 221, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .skill-box h4 {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-box h4 i {
+            color: var(--purple);
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .skill-list li {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+        }
+
+        .skill-list li strong {
+            color: var(--text-primary);
+        }
+
+        /* Experience & Education Dual Timeline */
+        .dual-timeline {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        @media (max-width: 900px) {
+            .dual-timeline {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .timeline-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--cyan);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.6rem;
+            top: 0.2rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-main);
+            border: 3px solid var(--cyan);
+        }
+
+        .timeline-period {
+            font-size: 0.8rem;
+            font-family: var(--font-code);
+            color: var(--emerald);
+            background: rgba(0, 245, 212, 0.08);
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item .role-subtitle {
+            color: var(--purple);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-item ul {
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        ul { margin-left: 1.5rem; margin-top: 0.5rem; }
-        .contact-info { margin-top: 1rem; font-size: 0.9rem; display: flex; justify-content: center; gap: 15px;}
-        .contact-info a { color: var(--accent); text-decoration: none; }
+
+        .timeline-item ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Certifications & Badges */
+        .cert-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .cert-badge {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.25rem 1.75rem;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 260px;
+        }
+
+        .cert-badge i {
+            font-size: 1.8rem;
+            color: var(--cyan);
+        }
+
+        /* Contact Section */
+        .contact-card-box {
+            background: linear-gradient(135deg, rgba(18, 24, 38, 0.8), rgba(26, 35, 54, 0.6));
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+            position: relative;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.25rem;
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 242, 254, 0.08);
+            transform: translateY(-4px);
+        }
+
+        .contact-item i {
+            font-size: 1.6rem;
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item span {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-main);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Dynamic Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
     <header>
-        <h1>Adarsh Banshpal</h1>
-        <p>Business Analyst | Digital Marketer | Mechanical Engineer</p>
-        <div class="contact-info">
-            <a href="mailto:adarsh.banshpal@gmail.com">adarsh.banshpal@gmail.com</a> | 
-            <span>9111531812</span> | 
-            <a href="https://in.linkedin.com/in/adarsh-banshpal-6a8504258" target="_blank">LinkedIn</a>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Adarsh.Banshpal</span>
+            </a>
+            <button class="menu-toggle" id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Live Work</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact" class="nav-btn">Get In Touch</a></li>
+            </ul>
         </div>
     </header>
 
-    <nav class="nav-tabs">
-        <button class="active" onclick="showSection('about')">Profile</button>
-        <button onclick="showSection('experience')">Experience</button>
-        <button onclick="showSection('education')">Education</button>
-        <button onclick="showSection('skills')">Skills</button>
-        <button onclick="showSection('projects')">Projects</button>
-    </nav>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="badge-status">
+                <span class="pulse-dot"></span>
+                <span>Open for Business Analyst & Analytics Roles</span>
+            </div>
+            <h1>Hi, I'm <span class="gradient-text">Adarsh Banshpal</span></h1>
+            <div class="typewriter-box">
+                <span id="typewriter-text"></span>
+            </div>
+            <p>
+                Analytical and detail-oriented MBA candidate specializing in <strong>Business Analytics</strong> with a solid foundation in <strong>Mechanical Engineering</strong>. Turning complex operational data into actionable business intelligence through Python, SQL, Power BI, and interactive web tools.
+            </p>
+            <div class="hero-ctas">
+                <a href="#projects" class="btn-primary">
+                    <i class="fa-solid fa-rocket"></i> Explore Live Deployments
+                </a>
+                <a href="https://adarxshhh.github.io/Adarsh-Banshpal-Resume" target="_blank" class="btn-secondary">
+                    <i class="fa-solid fa-file-invoice"></i> View Live Resume
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <div class="container">
-        <!-- Profile Section -->
-        <section id="about" class="section active">
-            <div class="card">
-                <h3>About Me</h3>
-                <p>Analytical and detail-oriented MBA candidate specializing in Business Analytics, backed by a strong foundation in
-Mechanical Engineering. Proficient in leveraging SQL, Python, Power BI, and advanced Excel to translate complex
-data into actionable business strategies. Combines quantitative engineering problem-solving with recent
-experience in client acquisition and campaign performance metrics to drive cross-functional efficiency.</p>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="section">
-            <div class="card">
-                <h3>Digital Marketing Intern</h3>
-                <p><strong>Pitambara Physio Care Rehab, Jabalpur</strong> | Dec/2025 - Feb/2026</p>
-                <ul>
-                    <li>Authored a comprehensive study on social media marketing effectiveness to improve digital outreach strategies and client acquisition.</li>
-                    <li>Designed targeted questionnaires to accurately measure campaign engagement and overall digital performance.</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>Digital Media Co-ordinator (Internship)</h3>
-                <p><strong>Padma Advertising</strong> | Dec/2025 - Feb/2026</p>
-                <ul>
-                    <li>Coordinated digital media operations and assisted in managing advertising initiatives.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="section">
-            <div class="card">
-                <h3>MBA (Business Analytics)</h3>
-                <p><strong>Gyan Ganga Institute of Technology and Sciences</strong> | 2024 - 2026</p>
-                <p>Current Score: 70% | Jabalpur</p>
-            </div>
-            <div class="card">
-                <h3>B.Tech in Mechanical Engineering</h3>
-                <p><strong>Rajiv Gandhi Proudyogiki Vishwavidyalaya</strong> | 2021 - 2024</p>
-                <p>Score: 74.7% | Jabalpur, India</p>
-            </div>
-            <div class="card">
-                <h3>Diploma in Mechanical Engineering</h3>
-                <p><strong>Rajiv Gandhi Proudyogiki Vishwavidyalaya</strong> | 2018 - 2021</p>
-                <p>Score: 77.6% | Jabalpur, India</p>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="card">
-                <h3>Technical & IT Skills</h3>
-                <div class="skills-grid">
-                    <div class="skill-tag">SQL</div>
-                    <div class="skill-tag">Python</div>
-                    <div class="skill-tag">Power BI</div>
-                    <div class="skill-tag">Microsoft Excel</div>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Design & Media Tools</h3>
-                <div class="skills-grid">
-                    <div class="skill-tag">SolidWorks</div>
-                    <div class="skill-tag">AutoCAD</div>
-                    <div class="skill-tag">Adobe Photoshop</div>
-                    <div class="skill-tag">Premiere Pro / After Effects</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="card">
-                <h3>Design And Development of Low Cost Vacuum Chamber</h3>
-                <p>Developed a low-cost vacuum chamber to create controlled environments by removing air and other gases. Designed the system for essential experiments and processes in fields such as material science, electronics, aerospace, and chemical engineering.</p>
-            </div>
-            <div class="card">
-                <h3>Certifications</h3>
-                <ul>
-                    <li><strong>Artificial Intelligence Job Simulation (Cognizant Forage):</strong> Machine Learning, Model Building, Data Modeling.</li>
-                    <li><strong>Digital Marketing (MSME)</strong></li>
-                    <li><strong>Elements of CAD (SolidWorks)</strong></li>
-                </ul>
-            </div>
-        </section>
+    <!-- Metric Counters -->
+    <div class="metric-banner">
+        <div class="metric-item">
+            <h3>4+</h3>
+            <p>Live Deployed Apps</p>
+        </div>
+        <div class="metric-item">
+            <h3>MBA</h3>
+            <p>Business Analytics</p>
+        </div>
+        <div class="metric-item">
+            <h3>B.Tech</h3>
+            <p>Mechanical Eng.</p>
+        </div>
+        <div class="metric-item">
+            <h3>100%</h3>
+            <p>Data & Value Driven</p>
+        </div>
     </div>
 
+    <!-- Skills Matrix Section -->
+    <section class="section-container" id="skills">
+        <div class="section-header">
+            <span class="section-tag">// Core Competencies</span>
+            <h2 class="section-title">Technical & Analytical Arsenal</h2>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-box">
+                <h4><i class="fa-solid fa-database"></i> Analytics & Data</h4>
+                <ul class="skill-list">
+                    <li><span>SQL & Data Querying</span> <strong>Advanced</strong></li>
+                    <li><span>Python (Pandas, NumPy)</span> <strong>Proficient</strong></li>
+                    <li><span>Power BI & DAX</span> <strong>Advanced</strong></li>
+                    <li><span>Advanced Excel & KPIs</span> <strong>Expert</strong></li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h4><i class="fa-solid fa-code"></i> App Dev & Prototyping</h4>
+                <ul class="skill-list">
+                    <li><span>Streamlit Web Apps</span> <strong>Proficient</strong></li>
+                    <li><span>Interactive HTML/CSS/JS</span> <strong>Proficient</strong></li>
+                    <li><span>Prompt Engineering & AI</span> <strong>Advanced</strong></li>
+                    <li><span>Data Modeling & QA</span> <strong>Certified</strong></li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h4><i class="fa-solid fa-bullhorn"></i> Digital Media & Tools</h4>
+                <ul class="skill-list">
+                    <li><span>Adobe Creative Suite</span> <strong>Creative</strong></li>
+                    <li><span>Google Ads & Outreach</span> <strong>Skilled</strong></li>
+                    <li><span>Social Media Analytics</span> <strong>Strategic</strong></li>
+                    <li><span>Client Acquisition Metrics</span> <strong>Hands-on</strong></li>
+                </ul>
+            </div>
+            <div class="skill-box">
+                <h4><i class="fa-solid fa-gears"></i> Engineering & Problem Solving</h4>
+                <ul class="skill-list">
+                    <li><span>SolidWorks & CAD</span> <strong>Trained</strong></li>
+                    <li><span>Supply Chain & Operations</span> <strong>Analytical</strong></li>
+                    <li><span>Root Cause Analysis</span> <strong>Logical</strong></li>
+                    <li><span>Leadership & Teamwork</span> <strong>Core</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section-container" id="projects">
+        <div class="section-header">
+            <span class="section-tag">// Portfolio & Live Builds</span>
+            <h2 class="section-title">Featured Projects & Deployments</h2>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="analytics">Data & Dashboards</button>
+            <button class="filter-btn" data-filter="games">Interactive Games</button>
+            <button class="filter-btn" data-filter="engineering">Engineering & Web</button>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1: Enhanced Sales Analytics -->
+            <div class="project-card" data-category="analytics">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <span class="live-tag">Live App</span>
+                    </div>
+                    <h3>Sales Dashboard Enhanced</h3>
+                    <p>
+                        Comprehensive interactive sales analytics platform built on Streamlit. Features dynamic KPI tracking, revenue growth metrics, customer segmentation, and visual breakdowns for operational strategy.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>Streamlit</span>
+                        <span>Pandas</span>
+                        <span>Data Viz</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://salesdashboardenhanced.streamlit.app/" target="_blank" class="btn-launch">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 2: Sales Dashboard Browser -->
+            <div class="project-card" data-category="analytics">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                        <span class="live-tag">Live App</span>
+                    </div>
+                    <h3>Sales Dashboard Browser</h3>
+                    <p>
+                        Streamlit-powered exploratory data interface designed to query, filter, and drill down into transactional sales records, regional performance, and real-time operational metrics.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Streamlit</span>
+                        <span>Data Pipeline</span>
+                        <span>SQL Logic</span>
+                        <span>Interactive UI</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://salesdashboardbrowser.streamlit.app/" target="_blank" class="btn-launch">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Launch Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 3: Neon Devil Game -->
+            <div class="project-card" data-category="games">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
+                        <span class="live-tag">Live Game</span>
+                    </div>
+                    <h3>Neon Devil Game</h3>
+                    <p>
+                        High-energy interactive web game featuring responsive logic, real-time scoring, custom theme styling, and state management deployed as a cloud Streamlit web application.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>Game Logic</span>
+                        <span>Streamlit UI</span>
+                        <span>State Management</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://neondevilgame.streamlit.app/" target="_blank" class="btn-launch">
+                        <i class="fa-solid fa-play"></i> Play Neon Devil
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 4: Level Mischief Game -->
+            <div class="project-card" data-category="games">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon"><i class="fa-solid fa-ghost"></i></div>
+                        <span class="live-tag">Live Game</span>
+                    </div>
+                    <h3>Level Mischief Game</h3>
+                    <p>
+                        Creative puzzle and mechanics-driven interactive game application showcasing creative problem solving, dynamic front-end state flow, and Python-based browser gameplay.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Python</span>
+                        <span>Streamlit</span>
+                        <span>Algorithmic Design</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <a href="https://levelmischiefgame.streamlit.app/" target="_blank" class="btn-launch">
+                        <i class="fa-solid fa-play"></i> Play Level Mischief
+                    </a>
+                </div>
+            </div>
+
+            <!-- Project 5: Power BI Analytics Dashboard -->
+            <div class="project-card" data-category="analytics">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon"><i class="fa-solid fa-chart-column"></i></div>
+                        <span class="live-tag" style="color: var(--purple); border-color: var(--purple);">Power BI</span>
+                    </div>
+                    <h3>Instagram Audience & Retention Analytics</h3>
+                    <p>
+                        Developed a Power BI analytics suite for Pitambara Physio Care & Rehab to track engagement, audience retention, drop-offs, and organic growth to drive digital marketing ROI.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Power BI</span>
+                        <span>DAX</span>
+                        <span>Audience Retention</span>
+                        <span>KPI Cards</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <span class="btn-launch" style="cursor: default; opacity: 0.9;">
+                        <i class="fa-solid fa-check-circle"></i> Industry Project
+                    </span>
+                </div>
+            </div>
+
+            <!-- Project 6: Low Cost Vacuum Chamber -->
+            <div class="project-card" data-category="engineering">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon"><i class="fa-solid fa-flask-vial"></i></div>
+                        <span class="live-tag" style="color: var(--cyan); border-color: var(--cyan);">Engineering</span>
+                    </div>
+                    <h3>Low-Cost Vacuum Chamber System</h3>
+                    <p>
+                        Engineered an economical vacuum chamber system to establish controlled depressurized environments for material science, chemical, and aerospace testing applications.
+                    </p>
+                    <div class="tech-tags">
+                        <span>Mechanical Design</span>
+                        <span>SolidWorks</span>
+                        <span>R&D</span>
+                        <span>Cost Optimization</span>
+                    </div>
+                </div>
+                <div class="card-actions">
+                    <span class="btn-launch" style="cursor: default; opacity: 0.9;">
+                        <i class="fa-solid fa-wrench"></i> Capstone Engineering
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education -->
+    <section class="section-container" id="experience">
+        <div class="section-header">
+            <span class="section-tag">// Journey & Milestones</span>
+            <h2 class="section-title">Experience & Education</h2>
+        </div>
+
+        <div class="dual-timeline">
+            <!-- Experience -->
+            <div class="timeline-column">
+                <h3><i class="fa-solid fa-briefcase"></i> Work Experience</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-period">12/2025 - 02/2026</span>
+                        <h4>Digital Marketing Intern</h4>
+                        <div class="role-subtitle">Pitambara Physio Care Rehab, Jabalpur</div>
+                        <ul>
+                            <li>Authored a comprehensive study on social media marketing effectiveness to improve outreach and customer acquisition.</li>
+                            <li>Designed targeted analytical questionnaires to measure campaign engagement and digital conversion metrics accurately.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-period">12/2025 - 02/2026</span>
+                        <h4>Digital Media Co-ordinator (Intern)</h4>
+                        <div class="role-subtitle">Padma Advertising</div>
+                        <ul>
+                            <li>Coordinated multi-channel digital media workflows and supported data-informed advertising initiatives.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-period">Ongoing</span>
+                        <h4>Interactive Web Portfolios & Visualization</h4>
+                        <div class="role-subtitle">Independent Client Solutions</div>
+                        <ul>
+                            <li>Designed and delivered custom interactive websites and data dashboards tailored to client operational needs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="timeline-column" id="education">
+                <h3><i class="fa-solid fa-graduation-cap"></i> Academic Background</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-period">2024 - 2026</span>
+                        <h4>MBA in Business Analytics</h4>
+                        <div class="role-subtitle">Gyan Ganga Institute of Technology & Sciences (CGPA: 70%)</div>
+                        <ul>
+                            <li>Specialization in quantitative modeling, statistical research methodology, and business intelligence.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-period">2021 - 2024</span>
+                        <h4>B.Tech in Mechanical Engineering</h4>
+                        <div class="role-subtitle">Rajiv Gandhi Proudyogiki Vishwavidyalaya (CGPA: 74.7%)</div>
+                        <ul>
+                            <li>Developed strong analytical problem-solving, mathematics, and systems optimization skills.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <span class="timeline-period">2018 - 2021</span>
+                        <h4>Diploma in Mechanical Engineering</h4>
+                        <div class="role-subtitle">Rajiv Gandhi Proudyogiki Vishwavidyalaya (CGPA: 77.6%)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certifications -->
+        <div style="margin-top: 4rem;">
+            <div class="section-header" style="margin-bottom: 2rem;">
+                <span class="section-tag">// Accreditations</span>
+                <h3 style="font-size: 1.6rem;">Industry Certifications</h3>
+            </div>
+            <div class="cert-container">
+                <div class="cert-badge">
+                    <i class="fa-solid fa-microchip"></i>
+                    <div>
+                        <strong>AI Job Simulation</strong>
+                        <p style="font-size: 0.82rem; color: var(--text-secondary);">Cognizant (Forage) - ML, Data Modeling, QA</p>
+                    </div>
+                </div>
+                <div class="cert-badge">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <div>
+                        <strong>Digital Marketing</strong>
+                        <p style="font-size: 0.82rem; color: var(--text-secondary);">MSME Certified</p>
+                    </div>
+                </div>
+                <div class="cert-badge">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                    <div>
+                        <strong>Elements of CAD & SolidWorks</strong>
+                        <p style="font-size: 0.82rem; color: var(--text-secondary);">Engineering Design & Modeling</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Connect -->
+    <section class="section-container" id="contact">
+        <div class="contact-card-box">
+            <span class="section-tag">// Direct Connect</span>
+            <h2 class="section-title" style="margin-bottom: 1rem;">Let's Collaborate & Build</h2>
+            <p style="color: var(--text-secondary); max-width: 600px; margin: auto;">
+                Have an opening for a Business Analyst, data visualization project, or need custom interactive web apps built? Let's get in touch!
+            </p>
+
+            <div class="contact-grid">
+                <a href="mailto:adarsh.banshpal@gmail.com" class="contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <strong>Email</strong>
+                    <span>adarsh.banshpal@gmail.com</span>
+                </a>
+                <a href="tel:+919111531812" class="contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <strong>Phone</strong>
+                    <span>+91 911 153 1812</span>
+                </a>
+                <a href="https://linkedin.com/in/adarshbanshpal" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <strong>LinkedIn</strong>
+                    <span>/in/adarshbanshpal</span>
+                </a>
+                <a href="https://adarxshhh.github.io/Adarsh-Banshpal-Resume" target="_blank" class="contact-item">
+                    <i class="fa-brands fa-github"></i>
+                    <strong>GitHub Web</strong>
+                    <span>Online Profile</span>
+                </a>
+            </div>
+
+            <a href="mailto:adarsh.banshpal@gmail.com" class="btn-primary" style="padding: 1rem 2.5rem;">
+                <i class="fa-solid fa-paper-plane"></i> Send Direct Message
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Adarsh Banshpal. Built with precision, data & code. Jabalpur, India.</p>
+    </footer>
+
+    <!-- Interactive Script -->
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            // Remove active class from all buttons
-            document.querySelectorAll('.nav-tabs button').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            // Show target section and highlight button
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
+        // --- 1. Typewriter Animation ---
+        const words = [
+            "MBA (Business Analytics) Specialist",
+            "Streamlit & Python Developer",
+            "Power BI & SQL Storyteller",
+            "Mechanical Engineering Background",
+            "Interactive Web Experience Builder"
+        ];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById("typewriter-text");
+
+        function type() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 1800;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(type, typeSpeed);
         }
+        type();
+
+        // --- 2. Interactive Projects Filter ---
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const projectCards = document.querySelectorAll(".project-card");
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+
+                const filter = btn.getAttribute("data-filter");
+                projectCards.forEach(card => {
+                    const category = card.getAttribute("data-category");
+                    if (filter === "all" || category === filter) {
+                        card.style.display = "flex";
+                        setTimeout(() => card.style.opacity = "1", 50);
+                    } else {
+                        card.style.opacity = "0";
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        // --- 3. Mobile Navigation Toggle ---
+        const menuBtn = document.getElementById("menu-btn");
+        const navLinks = document.getElementById("nav-links");
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+
+        // --- 4. Interactive Particles Background ---
+        const canvas = document.getElementById("particle-canvas");
+        const ctx = canvas.getContext("2d");
+
+        let width = (canvas.width = window.innerWidth);
+        let height = (canvas.height = window.innerHeight);
+
+        window.addEventListener("resize", () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const particleCount = Math.min(Math.floor(window.innerWidth / 16), 75);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? "rgba(0, 242, 254, " : "rgba(157, 78, 221, ";
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color + this.alpha + ")";
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${0.15 - dist / 1000})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
