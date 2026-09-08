@@ -30,6 +30,7 @@
             --text-muted: #64748b;
             --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.4);
             --modal-bg: #0e131f;
+            --input-bg: rgba(255, 255, 255, 0.04);
             --font-main: 'Plus Jakarta Sans', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,6 +54,7 @@
             --text-muted: #94a3b8;
             --shadow-card: 0 15px 30px rgba(15, 23, 42, 0.06);
             --modal-bg: #ffffff;
+            --input-bg: rgba(15, 23, 42, 0.03);
         }
 
         * {
@@ -767,6 +769,157 @@
             color: var(--text-secondary);
             margin-top: 0.2rem;
             word-break: break-all;
+        }
+
+        /* ==================== INQUIRY / QUERY FORM SECTION ==================== */
+        .inquiry-section-wrapper {
+            max-width: 850px;
+            margin: 3.5rem auto 0;
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inquiry-section-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--emerald), var(--cyan), var(--purple));
+        }
+
+        .inquiry-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .inquiry-header h3 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .inquiry-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .inquiry-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 0.85rem 1.1rem;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.92rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--cyan);
+            background: rgba(0, 242, 254, 0.04);
+            box-shadow: 0 0 15px var(--border-glow);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-status-msg {
+            display: none;
+            padding: 0.85rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .form-status-msg.success {
+            display: block;
+            background: rgba(0, 245, 212, 0.12);
+            color: var(--emerald);
+            border: 1px solid rgba(0, 245, 212, 0.3);
+        }
+
+        .form-status-msg.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.12);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-submit-query {
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.95rem 2rem;
+            border-radius: 12px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 20px var(--border-glow);
+        }
+
+        .btn-submit-query:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--border-glow-hover);
+        }
+
+        .btn-submit-query:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         /* ==================== RESUME MODAL VIEWER ==================== */
@@ -1510,6 +1663,50 @@
                 </a>
             </div>
         </div>
+
+        <!-- ==================== INQUIRY FORM (DIRECT TO GOOGLE SHEETS) ==================== -->
+        <div class="inquiry-section-wrapper" id="inquiry">
+            <div class="inquiry-header">
+                <span class="section-tag">// Quick Query</span>
+                <h3>Submit an Inquiry</h3>
+                <p>Drop your question or project details below — submissions record directly to Google Sheets in real-time.</p>
+            </div>
+
+            <form class="inquiry-form" id="google-sheets-inquiry-form">
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="inquiry-name"><i class="fa-solid fa-user"></i> Full Name *</label>
+                        <input type="text" id="inquiry-name" name="Name" placeholder="e.g. Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-email"><i class="fa-solid fa-envelope"></i> Email Address *</label>
+                        <input type="email" id="inquiry-email" name="Email" placeholder="e.g. rahul@company.com" required>
+                    </div>
+                </div>
+
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label for="inquiry-phone"><i class="fa-solid fa-phone"></i> Contact / WhatsApp (Optional)</label>
+                        <input type="tel" id="inquiry-phone" name="Phone" placeholder="+91 XXXXX XXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry-subject"><i class="fa-solid fa-tag"></i> Inquiry Subject</label>
+                        <input type="text" id="inquiry-subject" name="Subject" placeholder="e.g. Business Analytics Project / Role" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inquiry-message"><i class="fa-solid fa-comment-dots"></i> Message & Requirements *</label>
+                    <textarea id="inquiry-message" name="Message" placeholder="Write your message or inquiry details here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit-query" id="submit-inquiry-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Send Inquiry to Sheet
+                </button>
+
+                <div class="form-status-msg" id="form-status"></div>
+            </form>
+        </div>
     </section>
 
     <!-- ==================== RESUME MODAL VIEWER ==================== -->
@@ -1519,9 +1716,7 @@
             <div class="resume-modal-header">
                 <h3><i class="fa-solid fa-file-invoice"></i> Verified Curriculum Vitae</h3>
                 <div class="resume-actions-top">
-                    <button class="btn-modal-action" onclick="printResume()" title="Print Resume">
-                        <i class="fa-solid fa-print"></i> Print
-                    </button>
+                    <!-- Download PDF Action (Print Option Removed) -->
                     <a href="Adarsh_Banshpal_FlowCV.pdf" download="Adarsh_Banshpal_Resume.pdf" class="btn-modal-action btn-modal-download" title="Download PDF File">
                         <i class="fa-solid fa-download"></i> Download PDF
                     </a>
@@ -1548,7 +1743,7 @@
                 <div class="resume-section">
                     <div class="resume-section-title"><i class="fa-solid fa-user"></i> Professional Profile</div>
                     <p style="color: var(--text-secondary); line-height: 1.7;">
-                        Analytical and detail-oriented MBA candidate specializing in Business Analytics, backed by a strong foundation in Mechanical Engineering. Proficient in leveraging SQL, Python, Power BI, and advanced Excel to translate complex data into actionable business strategies. Combines quantitative engineering problem-solving with recent experience in client acquisition and campaign performance metrics to drive cross-functional efficiency.
+                        Analytical and detail-oriented MBA candidate specializing in Business Analytics, backed by a strong foundation in Mechanical Engineering. Proficient in leveraging SQL, Python, Power BI, and advanced Excel to translate complex data into actionable business strategies. Combines quantitative engineering problem-solving with recent experience in client acquisition and campaign performance metrics to drive cross-functional efficiency[cite: 1].
                     </p>
                 </div>
 
@@ -1558,19 +1753,19 @@
                     <div class="resume-skills-block">
                         <div>
                             <strong>Technical Skills:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">SQL, Python (NumPy, Pandas, Matplotlib), Power BI, Advanced Excel.</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">SQL, Python (NumPy, Pandas, Matplotlib), Power BI, Advanced Excel[cite: 1].</p>
                         </div>
                         <div>
                             <strong>Design & Media Tools:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Adobe Creative Suite, Google Ads, Prompt Engineering, SolidWorks CAD.</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Adobe Creative Suite, Google Ads, Prompt Engineering, SolidWorks CAD[cite: 1].</p>
                         </div>
                         <div>
                             <strong>Interpersonal Competencies:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Creativity, Leadership, Problem Identification & Solving, Adaptability, Team Work, Active Listening.</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">Creativity, Leadership, Problem Identification & Solving, Adaptability, Team Work, Active Listening[cite: 1].</p>
                         </div>
                         <div>
                             <strong>Languages:</strong>
-                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">English, Hindi (Full Professional Proficiency).</p>
+                            <p style="color: var(--text-secondary); margin-top: 0.2rem;">English, Hindi (Full Professional Proficiency)[cite: 1].</p>
                         </div>
                     </div>
                 </div>
@@ -1584,10 +1779,10 @@
                             <span>Digital Marketing Intern</span>
                             <span class="dates">12/2025 – 02/2026</span>
                         </div>
-                        <div class="resume-item-sub">Pitambara Physio Care Rehab, Jabalpur</div>
+                        <div class="resume-item-sub">Pitambara Physio Care Rehab, Jabalpur[cite: 1]</div>
                         <ul>
-                            <li>Authored a comprehensive study on social media marketing effectiveness to improve digital outreach strategies and client acquisition.</li>
-                            <li>Designed targeted questionnaires to accurately measure campaign engagement and overall digital performance.</li>
+                            <li>Authored a comprehensive study on social media marketing effectiveness to improve digital outreach strategies and client acquisition[cite: 1].</li>
+                            <li>Designed targeted questionnaires to accurately measure campaign engagement and overall digital performance[cite: 1].</li>
                         </ul>
                     </div>
 
@@ -1596,9 +1791,9 @@
                             <span>Digital Media Co-ordinator (Internship)</span>
                             <span class="dates">12/2025 – 02/2026</span>
                         </div>
-                        <div class="resume-item-sub">Padma Advertising</div>
+                        <div class="resume-item-sub">Padma Advertising[cite: 1]</div>
                         <ul>
-                            <li>Coordinated digital media operations and assisted in managing advertising initiatives.</li>
+                            <li>Coordinated digital media operations and assisted in managing advertising initiatives[cite: 1].</li>
                         </ul>
                     </div>
                 </div>
@@ -1612,7 +1807,7 @@
                             <span>MBA in Business Analytics</span>
                             <span class="dates">2024 – 2026</span>
                         </div>
-                        <div class="resume-item-sub">Gyan Ganga Institute of Technology and Sciences, Jabalpur (Current CGPA: 70%)</div>
+                        <div class="resume-item-sub">Gyan Ganga Institute of Technology and Sciences, Jabalpur (Current CGPA: 70%)[cite: 1]</div>
                     </div>
 
                     <div class="resume-item">
@@ -1620,7 +1815,7 @@
                             <span>B.Tech in Mechanical Engineering</span>
                             <span class="dates">2021 – 2024</span>
                         </div>
-                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 74.7%)</div>
+                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 74.7%)[cite: 1]</div>
                     </div>
 
                     <div class="resume-item">
@@ -1628,7 +1823,7 @@
                             <span>Diploma in Mechanical Engineering</span>
                             <span class="dates">2018 – 2021</span>
                         </div>
-                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 77.6%)</div>
+                        <div class="resume-item-sub">Rajiv Gandhi Proudyogiki Vishwavidyalaya, Jabalpur (CGPA: 77.6%)[cite: 1]</div>
                     </div>
                 </div>
 
@@ -1642,9 +1837,9 @@
                             <span class="dates">Client Projects</span>
                         </div>
                         <ul>
-                            <li>Developed custom, interactive HTML portfolio websites for customers based on their branding and business requirements.</li>
-                            <li>Designed responsive and visually engaging web pages to showcase multimedia content, services, and digital experiences.</li>
-                            <li>Integrated front-end development with UI/UX and digital marketing principles.</li>
+                            <li>Developed custom, interactive HTML portfolio websites for customers based on their branding and business requirements[cite: 1].</li>
+                            <li>Designed responsive and visually engaging web pages to showcase multimedia content, services, and digital experiences[cite: 1].</li>
+                            <li>Integrated front-end development with UI/UX and digital marketing principles[cite: 1].</li>
                         </ul>
                     </div>
 
@@ -1654,9 +1849,9 @@
                             <span class="dates">Streamlit & Python</span>
                         </div>
                         <ul>
-                            <li>Developed interactive dashboards to transform raw Excel and SQL data into clear, actionable business visualizations.</li>
-                            <li>Cleaned, organized, and analyzed datasets to identify revenue trends, sales performance, and customer segments.</li>
-                            <li>Built visualizations for supply chain tracking, revenue analysis, and customer segmentation.</li>
+                            <li>Developed interactive dashboards to transform raw Excel and SQL data into clear, actionable business visualizations[cite: 1].</li>
+                            <li>Cleaned, organized, and analyzed datasets to identify revenue trends, sales performance, and customer segments[cite: 1].</li>
+                            <li>Built visualizations for supply chain tracking, revenue analysis, and customer segmentation[cite: 1].</li>
                         </ul>
                     </div>
 
@@ -1666,8 +1861,8 @@
                             <span class="dates">Power BI & DAX</span>
                         </div>
                         <ul>
-                            <li>Developed a Power BI dashboard to analyze viewer engagement, retention, watch time, and subscriber growth for Pitambara Physio Care & Rehab.</li>
-                            <li>Created interactive charts, KPI cards, and trend visualizations to identify patterns in audience behavior.</li>
+                            <li>Developed a Power BI dashboard to analyze viewer engagement, retention, watch time, and subscriber growth for Pitambara Physio Care & Rehab[cite: 1].</li>
+                            <li>Created interactive charts, KPI cards, and trend visualizations to identify patterns in audience behavior[cite: 1].</li>
                         </ul>
                     </div>
 
@@ -1677,7 +1872,7 @@
                             <span class="dates">Mechanical Engineering</span>
                         </div>
                         <ul>
-                            <li>Developed a low-cost vacuum chamber system to establish depressurized environments for material science, aerospace, and chemical testing applications.</li>
+                            <li>Developed a low-cost vacuum chamber system to establish depressurized environments for material science, aerospace, and chemical testing applications[cite: 1].</li>
                         </ul>
                     </div>
                 </div>
@@ -1686,9 +1881,9 @@
                 <div class="resume-section">
                     <div class="resume-section-title"><i class="fa-solid fa-award"></i> Certifications</div>
                     <ul>
-                        <li><strong>Artificial Intelligence Job Simulation:</strong> Cognizant (Forage) – Machine Learning, Model Building, QA & Data Modeling.</li>
-                        <li><strong>Digital Marketing:</strong> MSME Certified.</li>
-                        <li><strong>Elements of CAD & SolidWorks:</strong> Engineering Design and 3D Modeling.</li>
+                        <li><strong>Artificial Intelligence Job Simulation:</strong> Cognizant (Forage) – Machine Learning, Model Building, QA & Data Modeling[cite: 1].</li>
+                        <li><strong>Digital Marketing:</strong> MSME Certified[cite: 1].</li>
+                        <li><strong>Elements of CAD & SolidWorks:</strong> Engineering Design and 3D Modeling[cite: 1].</li>
                     </ul>
                 </div>
             </div>
@@ -1702,7 +1897,66 @@
 
     <!-- Interactive Scripts -->
     <script>
-        // --- 1. Resume Modal Handlers ---
+        // --- 1. Google Sheets Inquiry Form Submission Handler ---
+        // Spreadsheet ID: 1v_CkapvCDoFysh2kClvixe1yHs9KJwP9LjvLwA96zAM
+        // To connect directly: Deploy a Google Apps Script Web App attached to your sheet and paste its URL into GOOGLE_SCRIPT_WEB_APP_URL below.
+        const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby-YOUR_DEPLOYED_APP_ID/exec"; 
+
+        const inquiryForm = document.getElementById("google-sheets-inquiry-form");
+        const submitBtn = document.getElementById("submit-inquiry-btn");
+        const statusMsg = document.getElementById("form-status");
+
+        inquiryForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting to Google Sheet...';
+            statusMsg.className = "form-status-msg";
+            statusMsg.style.display = "none";
+
+            const formData = new FormData(inquiryForm);
+            formData.append("Timestamp", new Date().toLocaleString());
+            formData.append("Sheet_ID", "1v_CkapvCDoFysh2kClvixe1yHs9KJwP9LjvLwA96zAM");
+
+            try {
+                // If you haven't deployed your Google Apps Script yet, fallback opens pre-filled email to ensure zero lost leads
+                if (GOOGLE_SCRIPT_WEB_APP_URL.includes("YOUR_DEPLOYED_APP_ID")) {
+                    const name = formData.get("Name");
+                    const email = formData.get("Email");
+                    const phone = formData.get("Phone") || "N/A";
+                    const subject = formData.get("Subject");
+                    const message = formData.get("Message");
+
+                    const mailtoLink = `mailto:adarsh.banshpal@gmail.com?subject=${encodeURIComponent("[Inquiry] " + subject)}&body=${encodeURIComponent(
+                        `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}\n\n(Logged for Sheet: 1v_CkapvCDoFysh2kClvixe1yHs9KJwP9LjvLwA96zAM)`
+                    )}`;
+
+                    window.location.href = mailtoLink;
+
+                    statusMsg.className = "form-status-msg success";
+                    statusMsg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Opening direct mail dispatcher. Once your Apps Script URL is set, records sync silently to Sheet <b>1v_CkapvCDoFysh2kClvixe1yHs9KJwP9LjvLwA96zAM</b>!';
+                    inquiryForm.reset();
+                } else {
+                    const response = await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                        method: "POST",
+                        body: formData,
+                        mode: "no-cors"
+                    });
+
+                    statusMsg.className = "form-status-msg success";
+                    statusMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Thank you! Your query has been recorded successfully into Google Sheets.';
+                    inquiryForm.reset();
+                }
+            } catch (error) {
+                statusMsg.className = "form-status-msg error";
+                statusMsg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Submission error. Please contact directly via WhatsApp or Email.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Inquiry to Sheet';
+            }
+        });
+
+        // --- 2. Resume Modal Handlers ---
         function openResumeModal() {
             const modal = document.getElementById("resume-modal");
             modal.classList.add("active");
@@ -1721,16 +1975,12 @@
             }
         }
 
-        function printResume() {
-            window.print();
-        }
-
         // Close on Escape key
         document.addEventListener("keydown", (e) => {
             if (e.key === "Escape") closeResumeModal();
         });
 
-        // --- 2. Dark / Light Theme Toggle with Persistent Storage ---
+        // --- 3. Dark / Light Theme Toggle with Persistent Storage ---
         const themeBtnDesktop = document.getElementById("theme-btn-desktop");
         const themeBtnMobile = document.getElementById("theme-btn-mobile");
 
@@ -1766,7 +2016,7 @@
         if (themeBtnDesktop) themeBtnDesktop.addEventListener("click", toggleTheme);
         if (themeBtnMobile) themeBtnMobile.addEventListener("click", toggleTheme);
 
-        // --- 3. Typewriter Animation ---
+        // --- 4. Typewriter Animation ---
         const words = [
             "MBA (Business Analytics) Specialist",
             "Streamlit & Python Developer",
@@ -1804,7 +2054,7 @@
         }
         type();
 
-        // --- 4. Interactive Projects Filter ---
+        // --- 5. Interactive Projects Filter ---
         const filterBtns = document.querySelectorAll(".filter-btn");
         const projectCards = document.querySelectorAll(".project-card");
 
@@ -1827,14 +2077,14 @@
             });
         });
 
-        // --- 5. Mobile Navigation Toggle ---
+        // --- 6. Mobile Navigation Toggle ---
         const menuBtn = document.getElementById("menu-btn");
         const navLinks = document.getElementById("nav-links");
         menuBtn.addEventListener("click", () => {
             navLinks.classList.toggle("active");
         });
 
-        // --- 6. Interactive Particles Background ---
+        // --- 7. Interactive Particles Background ---
         const canvas = document.getElementById("particle-canvas");
         const ctx = canvas.getContext("2d");
 
