@@ -1,0 +1,26 @@
+# Adarsh Banshpal - Business Analyst & Technologist
+
+> Analytical and detail-oriented MBA candidate specializing in Business Analytics with a background in Mechanical Engineering.
+
+## Core Information
+- Name: Adarsh Banshpal
+- Title: Business Analyst
+- Location: Jabalpur, Madhya Pradesh, India
+- Website: https://adarxshhh.github.io/Adarsh-Banshpal-Portfolio/
+- LinkedIn: https://linkedin.com/in/adarshbanshpal
+- GitHub: https://github.com/adarxshhh
+
+## Education
+- MBA in Business Analytics: Gyan Ganga Institute of Technology and Sciences (2024–2026)
+- B.Tech in Mechanical Engineering: Rajiv Gandhi Proudyogiki Vishwavidyalaya (2021–2024)
+- Diploma in Mechanical Engineering: Rajiv Gandhi Proudyogiki Vishwavidyalaya (2018–2021)
+
+## Skills
+- Analytics: SQL, Python (Pandas, NumPy), Power BI, Advanced Excel, DAX
+- Web & Tools: Streamlit, Interactive Web Development, Prompt Engineering, SolidWorks CAD
+
+## Key Projects
+- Sales Dashboard Enhanced (Streamlit, Python): https://salesdashboardenhanced.streamlit.app/
+- Sales Dashboard Browser (Streamlit, SQL logic): https://salesdashboardbrowser.streamlit.app/
+- Neon Devil Game (Interactive Python/Streamlit): https://neondevilgame.streamlit.app/
+- Level Mischief Game (Python/Streamlit): https://levelmischiefgame.streamlit.app/
