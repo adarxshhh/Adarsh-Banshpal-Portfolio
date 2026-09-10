@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Allow AI & Search Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://adarxshhh.github.io/Adarsh-Banshpal-Portfolio/sitemap.xml
